@@ -4,4 +4,4 @@ The votingbooth is going to be an python web-application to create polls and vot
 
 ## Datastorage
 
-The back-end data-storage is an Postgres databse.
+The back-end data-storage is an Postgres database.
