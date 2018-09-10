@@ -7,7 +7,7 @@ The votingbooth is a python web-application to create polls and vote in them. Vo
 
 Checkout the app att <https://fgronqvist-votingbooth.herokuapp.com/> and the repo at <https://github.com/fgronqvist/votingbooth>
 
-The specifications for the application is listed at <http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html> and usecases, object-diagrams, database schema layouts and definitions will be added as the work progresses.
+The specifications for the application is listed at <http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html>. [Usecases](documentation/userstories.md), object-diagrams, database schema layouts and definitions will be added as the work progresses.
 
 Check out the [documentation](documentation) for further details.
 
