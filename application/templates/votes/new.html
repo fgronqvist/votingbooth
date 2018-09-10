@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="post" action="{{ url_for('vote_create') }}">
+    Poll id: <input type="text" name="poll_id"/> <br>
+    Value: <input type="text" name="vote_value"/> <br> 
+    <input type="submit" name="submit" value="Store new vote"/>
+</form>
+{% endblock body %}

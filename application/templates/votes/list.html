@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Poll id</th>
+        <th>Value</th>
+        <th>NULLIFY</th>
+    </tr>
+    {% for vote in votes %}
+    <tr>
+        <td>{{ vote.poll_id }}</td>
+        <td>{{ vote.value }}</td>
+        <td>
+            <form method="post" action="{{ url_for('nullify_vote', vote_id = vote.id) }}">
+                <input type="submit" name="submit" value="NULLIFY"/>
+            </form>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
