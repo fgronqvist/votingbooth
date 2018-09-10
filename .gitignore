@@ -107,3 +107,4 @@ venv.bak/
 scratch.txt
 .vscode/
 votingbooth.db
+*.dia
