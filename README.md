@@ -1,7 +1,7 @@
 # Votingbooth
 Need to vote on something? Step right up to the votingbooth and cast your vote. Are you doing your part?
 
-# Overview
+## Overview
 
 The votingbooth is a python web-application to create polls and vote in them. Votes can be cast either anonymously or as a registered user, but all cast votes are anonymous regardless of login status.
 
