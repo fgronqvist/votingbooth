@@ -9,7 +9,12 @@ Checkout the app att <https://fgronqvist-votingbooth.herokuapp.com/> and the rep
 
 The specifications for the application is listed at <http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html> and usecases, object-diagrams, database schema layouts and definitions will be added as the work progresses.
 
+Check out the [documentation](documentation) for further details.
+
 ## Datastorage
 
-The back-end data-storage is a Postgres database.
+The back-end data-storage is a Postgres database with a schema pictured below.
+
+![db diagram](documentation/Db_diagram.png)
+
 
