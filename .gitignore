@@ -106,3 +106,4 @@ venv.bak/
 # FG
 scratch.txt
 .vscode/
+votingbooth.db
