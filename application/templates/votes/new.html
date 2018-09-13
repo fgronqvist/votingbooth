@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% set active_page = 'vote_form' %}
 
 {% block body %}
 <form method="post" action="{{ url_for('vote_create') }}">
