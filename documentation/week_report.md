@@ -17,6 +17,11 @@ What has been done week 2
 * Preliminary userstories
 * Basic layout/visualization
 
+What has been done week 3
+
+* User registration and login with form validation
+* Basic poll structure with crud capabilities for the poll (no voting options yet)
+
 ## Time worked
 
 | Date | Time | What |
@@ -25,3 +30,5 @@ What has been done week 2
 | 2018-9-9 | 2 h | Heroku setup, Github repo, Labtool registration|
 | 2018-9-10 | 4 h - | Application directory structure, application design and programming, DB design|
 | 2018-9-13 | 3 h | Week 2 work, added bootstrap for layout and visualizations|
+| 2018-9-22 | 3 h | User registration, form validation |
+| 2018-9-24 | 8 h | User registration and login, form validation|
