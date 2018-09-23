@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% for error in form.errors %}
+    <p style="color:red">{{ error }}</p>
+{% endfor %}
+{% if email_error %}
+    <p style="color: red">{{ email_error }}</p>
+{% endif %}
+
+<form class="" method="post" action="{{ url_for("user_registerb") }}">
+    <label>{{ form.firstname.label }}</label>
+    {{ form.firstname }}
+    <label>{{ form.lastname.label }}</label>
+    {{ form.lastname }}
+    <label>{{ form.email.label }}</label>
+    {{ form.email }}
+    <label>{{ form.password.label }}</label>
+    {{ form.password }}
+    <label>{{ form.passwordb.label }}</label>
+    {{ form.passwordb }}
+
+    <button type="submit">Register</button>
+</form>
+{% endblock %}

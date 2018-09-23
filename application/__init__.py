@@ -1,16 +1,46 @@
 from flask import Flask
 app = Flask(__name__)
 
+# Init debug toolbar
+from flask_debugtoolbar import DebugToolbarExtension
+app.config['SECRET_KEY'] = "develdeveldeveldevel"
+toolbar = DebugToolbarExtension(app)
+
 # Init SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///votingbooth.db"
-app.config["SQLALCHEMY_ECHO"] = True
+import os
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///votingbooth.db"
+    app.config["SQLALCHEMY_ECHO"] = True
+
 db = SQLAlchemy(app)
 
-# Setup views
-from application import views
+# Init bcrypt
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
+BCRYPT_LOG_ROUNDS = 12
 
-# Setup db tables
-from application.votes import models
-from application.votes import views
-db.create_all()
+# Init app modules
+from application import views
+from application.user import views
+from application.user import models
+from application.user.models import User
+from application.poll import views
+from application.poll import models
+
+try:
+    db.create_all()
+except:
+    pass
+
+# Init login manager
+from flask_login import LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "index"
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.filter(User.id==userid).first()
