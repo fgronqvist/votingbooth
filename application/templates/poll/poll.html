@@ -12,12 +12,16 @@
     </div>
     <div class="form-group">
       <label for="inputPollStart">Start</label>
-      {{ form.start(class = "form-control") }}
+      {{ form.start_date(class = "form-control-inline") }}
+      {{ form.start_hour(class = "form-control-inline") }}
+      {{ form.start_minute(class = "form-control-inline") }}
       <small id="pollStartHelp" class="form-text text-muted">Start date and time for the poll.</small>
     </div>
     <div class="form-group">
       <label for="inputPollEnd">End</label>
-      {{ form.end(class = "form-control") }}
+      {{ form.end_date(class = "form-control-inline") }}
+      {{ form.end_hour(class = "form-control-inline") }}
+      {{ form.end_minute(class = "form-control-inline") }}
       <small id="pollEndtHelp" class="form-text text-muted">End date and time for the poll.</small>
     </div>
     {% if poll.id %}
@@ -114,4 +118,12 @@
     </a>
   </fieldset>
 </form>
+
+<script type="text/javascript">
+  $(function () {
+      $('#start_date').datetimepicker({
+          locale: 'fi'
+      });
+  });
+</script>
 {% endblock %}
