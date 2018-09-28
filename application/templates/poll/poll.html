@@ -12,7 +12,7 @@
     </div>
     <div class="form-group">
       <label for="inputPollStart">Start</label>
-      {{ form.start_date(class = "form-control-inline") }}
+      {{ form.start_date(class = "form-control-inline datetimepicker-input") }}
       {{ form.start_hour(class = "form-control-inline") }}
       {{ form.start_minute(class = "form-control-inline") }}
       <small id="pollStartHelp" class="form-text text-muted">Start date and time for the poll.</small>
@@ -120,9 +120,14 @@
 </form>
 
 <script type="text/javascript">
-  $(function () {
-      $('#start_date').datetimepicker({
-          locale: 'fi'
+$(function() {
+    console.log( "ready!" );
+});
+  $(function(){
+      $('#start_date').datepicker({
+        minDate: 0, 
+        maxDate: "+1Y",
+        option: $.datepicker.regional['fi']
       });
   });
 </script>

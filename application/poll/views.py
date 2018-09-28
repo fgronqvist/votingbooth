@@ -44,8 +44,8 @@ def poll_edit(poll_id):
         # Show data (first load or if the form validation fails)
         form = PollForm(request.form)
         form.name.data = poll.name
-        form.start.data = poll.date_open
-        form.end.data = poll.date_close
+        form.start_date.data = poll.date_open
+        form.end_date.data = poll.date_close
         return render_template("poll/poll.html", form = form, action_url = url_for("poll_edit", poll_id = poll_id),
             poll = poll)
 

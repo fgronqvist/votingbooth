@@ -5,8 +5,17 @@
     <title>Votingbooth</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.theme.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tempusdominus-bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n/datepicker-fi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tempusdominus-bootstrap-4.min.js') }}"></script>
   </head>
 
   <body>
@@ -18,10 +27,5 @@
     {% block body %}
     {% endblock %}
     </div>
-    <script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/tempusdominus-bootstrap-4.min.js') }}"></script>
   </body>
 </html>
