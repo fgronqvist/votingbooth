@@ -24,9 +24,9 @@ BCRYPT_LOG_ROUNDS = 12
 
 # Init app modules
 from application import views
-from application.user import views
-from application.user import models
-from application.user.models import User
+from application.account import views
+from application.account import models
+from application.account.models import Account
 from application.poll import views
 from application.poll import models
 
@@ -43,4 +43,4 @@ login_manager.login_view = "index"
 
 @login_manager.user_loader
 def load_user(userid):
-    return User.query.filter(User.id==userid).first()
+    return Account.query.filter(Account.id==userid).first()
