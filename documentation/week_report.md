@@ -21,6 +21,8 @@ What has been done week 3
 
 * User registration and login with form validation
 * Basic poll structure with crud capabilities for the poll (no voting options yet)
+* Layout work and fix for user/account
+* Voting options added
 
 ## Time worked
 
@@ -32,3 +34,4 @@ What has been done week 3
 | 2018-9-13 | 3 h | Week 2 work, added bootstrap for layout and visualizations|
 | 2018-9-22 | 3 h | User registration, form validation |
 | 2018-9-24 | 8 h | User registration and login, form validation|
+| 2018-9-29 | 7 h | User/account switch, added voting_options table and made it possible to add, sort and remove voting options, layout changes|
