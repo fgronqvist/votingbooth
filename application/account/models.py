@@ -1,6 +1,6 @@
 from application import db, bcrypt
 
-class User(db.Model):
+class Account(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())

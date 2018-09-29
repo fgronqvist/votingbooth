@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set active_page = 'user_index' %}
+{% set active_page = 'account_index' %}
 
 {% block body %}
 <div class="card border-primary mb-3" style="max-width: 40rem;">
@@ -21,8 +21,8 @@
                 <img src="{{ url_for('static', filename='img/page_edit.png') }}" title="Edit poll"></a>
                 </td>
                 <td>{{ poll.name }}</td>
-                <td>{{ poll.date_open }}</td>
-                <td>{{ poll.date_close }}</td>
+                <td>{{ poll.date_open.strftime("%-d.%-m.%Y %H:%M") }}</td>
+                <td>{{ poll.date_close.strftime("%-d.%-m.%Y %H:%M") }}</td>
                 <td>N/A</td>
             </tr>
             {% endfor %}
