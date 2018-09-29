@@ -26,3 +26,9 @@ class Vote(db.Model):
     def __init__(self, poll_id, value):
         self.poll_id = poll_id
         self.value = value
+
+class Vote_option(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    poll_id = db.Column(db.Integer, nullable=False)
+    ordernum = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(256), nullable=False)

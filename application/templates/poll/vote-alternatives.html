@@ -1,0 +1,46 @@
+{% block vote_alternatives %}
+
+<form method="post" action="{{ url_for('new_alternative', poll_id=poll.id) }}">
+<fieldset>
+  <legend>Voting alternatives</legend>
+  <div class="form-group">
+      <label for="inputPollName">New alternative</label>
+      {{ vote_option_form.name(class = "form-control") }}
+      <small id="pollNameHelp" class="form-text text-muted">Please use a descriptive name for the alternative.</small>
+      <button type="submit" class="btn btn-primary btn-inline">Add</button>
+  </div>
+</fieldset>
+</form>
+
+<ul class="list-group" id="optionlist">
+  {% for option in vote_options %}
+    <li id="opt_{{option.id}}" class="list-group-item list-group-item-action">{{ option.name }}
+      <a class="confirm_option_delete" href="{{url_for('delete_alternative', option_id=option.id, poll_id=poll.id)}}" title="Delete this option" style="float:right;"><img src="{{ url_for('static', filename='img/delete.png') }}"></a>
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+  $(".confirm_option_delete").click(function(){
+    if(confirm("Are you sure you want to delete this alternative?")){
+      return true;
+    }
+    return false;
+  });
+
+  $( function(){
+    $("#optionlist").sortable({
+      update: function (event, ui){
+        var data = $(this).sortable('serialize');
+        //alert(data);
+        $.ajax({
+          data: data,
+          type: 'POST',
+          url: '{{url_for('save_alternative_order', poll_id=poll.id)}}'
+        })
+      }
+    });
+  })
+</script>
+
+{% endblock %}
