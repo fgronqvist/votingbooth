@@ -29,6 +29,7 @@ from application.account import models
 from application.account.models import Account
 from application.poll import views
 from application.poll import models
+from application.vote import views
 
 try:
     db.create_all()
