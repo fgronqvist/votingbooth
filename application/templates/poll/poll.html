@@ -18,7 +18,9 @@
     </div>
     <div class="col-md-auto">
       {% block vote_alternatives %}
-        {% include 'poll/vote-alternatives.html' %}
+        {% if poll.id %}
+          {% include 'poll/vote-alternatives.html' %}
+        {% endif %}
       {% endblock %}  
     </div>
   </div>

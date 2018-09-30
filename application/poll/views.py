@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, redirect, url_for, abort
 from flask_login import login_required, current_user
-from .models import Vote, Poll, Vote_option
+from .models import Poll, Vote_option
 from .forms import PollForm, VoteOptionForm
 from sqlalchemy import exc
 from datetime import datetime
@@ -10,13 +10,18 @@ from datetime import datetime
 @login_required
 def poll_new():
     form = PollForm(request.form)
-    poll = Poll(form.name.data, current_user.id)
+    poll = Poll(current_user.id)
     if form.validate_on_submit():
-        poll.date_open = form.start.data
-        poll.date_close = form.end.data
+        poll.name = form.name.data
+        d = datetime.strftime(form.start_date.data, "%d.%m.%Y")
+        d = d +" "+str(form.start_hour.data)+":"+str(form.start_minute.data)
+        poll.date_open = datetime.strptime(d, "%d.%m.%Y %H:%M")
+        d = datetime.strftime(form.end_date.data, "%d.%m.%Y")
+        d = d +" "+str(form.end_hour.data)+":"+str(form.end_minute.data)
+        poll.date_close = datetime.strptime(d, "%d.%m.%Y %H:%M")
         db.session.add(poll)
         db.session.commit()
-        return redirect(url_for("account_index"))
+        return redirect(url_for("poll_edit", poll_id=poll.id))
     else:
         return render_template("poll/poll.html", form = form, action_url = url_for("poll_new"), poll = poll)
 
@@ -40,11 +45,9 @@ def poll_edit(poll_id):
         poll.name = form.name.data
         d = datetime.strftime(form.start_date.data, "%d.%m.%Y")
         d = d +" "+str(form.start_hour.data)+":"+str(form.start_minute.data)
-        print(d)
         poll.date_open = datetime.strptime(d, "%d.%m.%Y %H:%M")
         d = datetime.strftime(form.end_date.data, "%d.%m.%Y")
         d = d +" "+str(form.end_hour.data)+":"+str(form.end_minute.data)
-        print(d)
         poll.date_close = datetime.strptime(d, "%d.%m.%Y %H:%M")
         db.session.add(poll)
         db.session.commit()
@@ -124,25 +127,3 @@ def delete_alternative():
     db.session.delete(vote_option)
     db.session.commit()
     return redirect(url_for("poll_edit", poll_id=poll.id))
-
-@app.route("/votes/", methods=["GET"])
-def votes_index():
-    return render_template("poll/vote_list.html", votes = Vote.query.all())
-
-@app.route("/vote/new")
-def vote_form():
-    return render_template("poll/vote_new.html")
-
-@app.route("/votes/", methods=["POST"])
-def vote_create():
-    vote = Vote(request.form.get("poll_id"), request.form.get("vote_value"))
-    db.session.add(vote)
-    db.session.commit()
-    return redirect(url_for("votes_index"))
-
-@app.route("/vote/<vote_id>/", methods=["POST"])
-def nullify_vote(vote_id):
-    v = Vote.query.get(vote_id)
-    v.value = "NULLIFIED"
-    db.session.commit()
-    return redirect(url_for("votes_index"))
