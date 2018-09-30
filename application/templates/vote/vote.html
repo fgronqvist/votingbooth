@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% set active_page = 'vote' %}
+
+{% block body %}
+<form method="post" action="{{url_for('show_confirm')}}">
+{{form.poll_id}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-auto">
+            <legend>{{poll.name}}</legend>
+            <div class="form-group">
+            {% for option in form.vote_options %}
+            <div class="custom-control custom-radio" style="margin-top: 20px; margin-bottom: 20px;">
+                <input id="customRadio{{ loop.index }}" name="voteoption" value="{{option.id}}" class="custom-control-input" type="radio">
+                <label class="custom-control-label" for="customRadio{{loop.index}}">{{option.name}}</label>
+            </div>
+            {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Choose</button>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

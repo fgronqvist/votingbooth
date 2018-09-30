@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% set active_page = 'vote' %}
+
+{% block body %}
+<form method="post" action="{{url_for('vote_confirm')}}">
+{{ form.csrf_token }}
+{{form.poll_id}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-auto">
+            <legend>{{poll.name}}</legend>
+            <div class="form-group">
+                <p>Confirm your choice.</p>
+            <div class="custom-control custom-radio" style="margin-top: 20px; margin-bottom: 20px;">
+                <input id="customRadio1" name="selected_option" value="{{vote_option.id}}" class="custom-control-input" checked="" type="radio">
+                <label class="custom-control-label" for="customRadio1">{{vote_option.name}}</label>
+            </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <a href="/vote/2"><button type="button" class="btn btn-secondary">Cancel</button></a>
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}

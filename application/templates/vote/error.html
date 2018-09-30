@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% set active_page = 'vote' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-auto">
+            <legend>{{poll.name}}</legend>
+            <div class="form-group">
+                <p>Errors were encountered and your vote was <u>not</u> registered!</p>
+            </div>
+            {% for field in form.errors %}
+                {% for error in form.errors[field] %}
+                <div class="alert alert-danger">
+                    <strong>Error in field {{field}}!</strong> {{error}}
+                </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</form>
+{% endblock %}
