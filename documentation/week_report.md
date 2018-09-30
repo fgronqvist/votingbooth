@@ -23,6 +23,7 @@ What has been done week 3
 * Basic poll structure with crud capabilities for the poll (no voting options yet)
 * Layout work and fix for user/account
 * Voting options added
+* Added possibility to vote (anonymously) on polls
 
 ## Time worked
 
@@ -35,3 +36,4 @@ What has been done week 3
 | 2018-9-22 | 3 h | User registration, form validation |
 | 2018-9-24 | 8 h | User registration and login, form validation|
 | 2018-9-29 | 7 h | User/account switch, added voting_options table and made it possible to add, sort and remove voting options, layout changes|
+| 2018-9-30 | 5 h | Custom validation for start >= end date of poll, fix for poll editing, added possibility to vote (anonymously) on a poll|
