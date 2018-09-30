@@ -116,12 +116,14 @@
       </fieldset>
 </form>
 
+{% if poll.id %}
 <div class="card border-primary mb-3" style="margin-top: 20px; max-width: 20rem;">
     <div class="card-body">
       <h4 class="card-title">Address for voting in this poll</h4>
       <p class="card-text"><a href="{{url_for('vote_id', poll_id=poll.id) }}">{{url_for('vote_id', poll_id=poll.id, _external=True) }}</a></p>
     </div>
   </div>
+{% endif %}
 
 <script type="text/javascript">
 datepicker_options = {
