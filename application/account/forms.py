@@ -15,6 +15,3 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField(u"Email", [validators.InputRequired(), validators.Email()])        
     password = PasswordField(u"Password", [validators.InputRequired()])
-
-    class Meta:
-        csrf = False

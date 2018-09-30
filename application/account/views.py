@@ -21,7 +21,7 @@ def account_login():
         login_user(account)
         return redirect(url_for("account_index"))
     else:
-        return render_template("index.html", login_error = True)
+        return render_template("index.html", form=login_form, login_error = True)
 
 @app.route("/account/register", methods=["GET"])
 def account_register():
