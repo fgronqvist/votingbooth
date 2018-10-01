@@ -45,7 +45,7 @@ def vote_confirm():
     if form.validate_on_submit():
         try:
             vote = Vote()
-            vote.poll_id = form.poll_id.data
+            vote.poll_id = poll.id
             vote.value = form.selected_option.data
             db.session.add(vote)
             db.session.commit()
