@@ -9,6 +9,8 @@ class Account(db.Model):
     email = db.Column(db.String(256), nullable=False, unique=True)
     password = db.Column(db.String(256), nullable=False)
 
+    polls = db.relationship("Poll", backref="owner", lazy=True)
+
     def __init__(self, firstname, lastname, email, password):
         self.firstname = firstname
         self.lastname = lastname
