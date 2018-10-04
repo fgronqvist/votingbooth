@@ -27,14 +27,13 @@ from application import views
 from application.account import views
 from application.account import models
 from application.account.models import Account
-from application.poll import views
-from application.poll import models
-from application.vote import views
+from application.poll import views, models
+from application.vote import views, models
 
-try:
-    db.create_all()
-except:
-    pass
+db.create_all()
+#try:
+#except:
+#    pass
 
 # Init login manager
 from flask_login import LoginManager

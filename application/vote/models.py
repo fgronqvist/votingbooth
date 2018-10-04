@@ -6,4 +6,4 @@ class Vote(db.Model):
     date_modified = db.Column(db.DateTime(timezone=True), default=db.func.current_timestamp(),
     onupdate=db.func.current_timestamp())
     poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False)
-    value = db.Column(db.String(256), nullable=False)
+    value = db.Column(db.String(256), db.ForeignKey('vote_option.id'), nullable=False)
