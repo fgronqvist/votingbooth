@@ -54,7 +54,6 @@ def poll_edit(poll_id):
         return redirect(url_for("account_index"))
     else:
         # Show data (first load or if the form validation fails)
-        # form = PollForm(request.form)
         form.name.data = poll.name
         form.start_date.data = poll.date_open
         form.start_hour.data = datetime.strftime(poll.date_open, "%-H")
@@ -109,14 +108,8 @@ def save_alternative_order(poll_id):
     
     for opt in vote_options:
         opt.ordernum = order_tbl[opt.id]
-        print(opt)
         db.session.add(opt)
         db.session.commit()
-
-    #print(order_tbl)
-    # {1: 0, 2: 1}
-    #opt[]=2&opt[]=1&opt[]=3&opt[]=4
-    #return redirect(url_for("poll_edit", poll_id=poll.id))
     return ""
 
 @app.route("/poll/delete_alternative/", methods=["GET"])
