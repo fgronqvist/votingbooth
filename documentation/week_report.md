@@ -25,6 +25,11 @@ What has been done week 3
 * Voting options added
 * Added possibility to vote (anonymously) on polls
 
+What has been done week 4
+
+* Relationships added
+* Bugfix for NumberValidation on poll minute -field (see https://github.com/wtforms/wtforms/issues/100)
+
 ## Time worked
 
 | Date | Time | What |
@@ -37,3 +42,4 @@ What has been done week 3
 | 2018-9-24 | 8 h | User registration and login, form validation|
 | 2018-9-29 | 7 h | User/account switch, added voting_options table and made it possible to add, sort and remove voting options, layout changes|
 | 2018-9-30 | 5 h | Custom validation for start >= end date of poll, fix for poll editing, added possibility to vote (anonymously) on a poll|
+| 2018-10-4 | 3h | Relationships, bug fix on the poll minute validation|
