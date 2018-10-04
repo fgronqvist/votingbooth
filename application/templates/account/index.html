@@ -23,7 +23,7 @@
                 <td>{{ poll.name }}</td>
                 <td>{{ poll.date_open.strftime("%-d.%-m.%Y %H:%M") }}</td>
                 <td>{{ poll.date_close.strftime("%-d.%-m.%Y %H:%M") }}</td>
-                <td>N/A</td>
+                <td>{{ poll.votes|length }}</td>
             </tr>
             {% endfor %}
         </tbody>
