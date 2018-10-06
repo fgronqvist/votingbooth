@@ -1,21 +1,30 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, BooleanField, IntegerField, HiddenField, validators, ValidationError
+from wtforms import StringField, DateField, BooleanField, IntegerField, HiddenField, SelectField, validators, ValidationError
 from datetime import datetime
 
 
 class PollForm(FlaskForm):
+    def time_range(max=24):
+        r = []
+        for i in range(max):
+            t = ('{}'.format(i), '{:02d}'.format(i))
+            r.append(t)
+        return r
+
     poll_id = HiddenField(u"poll_id")
     name = StringField(u"Name", [validators.Length(min=1, max=256)])
     start_date = DateField(u"Start date", [validators.InputRequired()], format="%d.%m.%Y")
-    start_hour = IntegerField(u"Start hour", [validators.Required(), validators.NumberRange(min=1, max=23)])
-    start_minute = IntegerField(u"Start minute")
+    start_hour = SelectField(u"Start hour", choices=time_range(24))
+    start_minute = SelectField(u"Start minute", choices=time_range(60))
     end_date = DateField(u"End", [validators.Required()], format="%d.%m.%Y")    
-    end_hour = IntegerField(u"End hour", [validators.Required(), validators.NumberRange(min=1, max=23)])
-    end_minute = IntegerField(u"End minute")
+    end_hour = SelectField(u"End hour", choices=time_range(24))
+    end_minute = SelectField(u"End minute", choices=time_range(60))
     delete = BooleanField(u"Delete")
 
     class Meta:
         csrf = False
+
+
 
     def validate(self):
         try:

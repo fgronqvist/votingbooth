@@ -11,6 +11,10 @@ button {
     margin-bottom: 20px;
 }
 
+.draggable {
+  cursor: move;
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;

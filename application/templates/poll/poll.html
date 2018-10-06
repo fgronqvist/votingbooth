@@ -2,14 +2,7 @@
 {% set active_page = 'poll' %}
 
 {% block body %}
-{% for field in form.errors %}
-  {% for error in form.errors[field] %}
-    <div class="alert alert-danger">
-        <strong>Error in field {{field}}!</strong> {{error}}
-    </div>
-  {% endfor %}
-{% endfor %}
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
       {% block poll_details %}
@@ -21,7 +14,7 @@
         {% if poll.id %}
           {% include 'poll/vote-alternatives.html' %}
         {% endif %}
-      {% endblock %}  
+      {% endblock %}
     </div>
   </div>
 </div>
