@@ -39,17 +39,19 @@ def vote_confirm():
     form = VoteFormConfirm(request.form)
     try:
         poll = Poll.query.filter_by(id=int(form.poll_id.data)).one()
-    except exc.SQLAlchemyError:
+    except exc.SQLAlchemyError as e:
+        print(e)
         abort(404)            
 
     if form.validate_on_submit():
         try:
             vote = Vote()
             vote.poll_id = poll.id
-            vote.value = form.selected_option.data
+            vote.vote_option_id = int(form.selected_option.data)
             db.session.add(vote)
             db.session.commit()
-        except exc.SQLAlchemyError:
+        except exc.SQLAlchemyError as e:
+            print(e)
             abort(404)    
         return render_template("vote/thankyou.html", poll=poll)
     else:
