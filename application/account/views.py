@@ -11,7 +11,18 @@ from application.account.forms import RegisterForm, LoginForm
 @login_required
 def account_index():
     polls = Poll.query.filter_by(owner_id=current_user.id)
-    return render_template("account/index.html", polls = polls)
+    breakdown = request.args.get("breakdown")
+    poll_breakdown = False
+    selected_poll = False
+    if breakdown:
+        try:
+            poll_breakdown = Poll.get_vote_breakdown(owner_id=current_user.id, poll_id=breakdown)
+            selected_poll = Poll.query.filter_by(owner_id=current_user.id, id=breakdown).one()
+        except exc.SQLAlchemyError as e:
+            print(e)
+            abort(404)
+
+    return render_template("account/index.html", polls = polls, poll_breakdown=poll_breakdown, selected_poll=selected_poll)
 
 @app.route("/account/login", methods=["POST"])
 def account_login():

@@ -1,0 +1,36 @@
+
+{% block poll_list %}
+<div class="card border-primary mb-3" style="max-width: 40rem;">
+    <div class="card-header">My polls</div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Start</th>
+                <th scope="col">End</th>
+                <th scope="col">Votes</th>
+                <th scope="col">Breakdown</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for poll in polls %}
+            <tr>
+                <td><a href="{{ url_for("poll_edit", poll_id = poll.id) }}">
+                        <img src="{{ url_for('static', filename='img/page_edit.png') }}" title="Edit poll"></a>
+                </td>
+                <td>{{ poll.name }}</td>
+                <td>{{ poll.date_open.strftime("%-d.%-m.%Y %H:%M") }}</td>
+                <td>{{ poll.date_close.strftime("%-d.%-m.%Y %H:%M") }}</td>
+                <td>{{ poll.votes|length }}</td>
+                <td><a href="{{ url_for("account_index", breakdown=poll.id) }}"><img src="{{ url_for("static", filename="img/chart_curve.png") }}"
+                            title="Poll breakdown"></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="card-body">
+        <a href="{{ url_for("poll_new") }}" class="card-link">Create new poll</a>
+    </div>
+</div>
+{% endblock %}

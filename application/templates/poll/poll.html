@@ -11,12 +11,12 @@
 {% endfor %}
 <div class="container">
   <div class="row">
-    <div class="col-md-auto">
+    <div class="col">
       {% block poll_details %}
         {% include 'poll/poll-details.html' %}
       {% endblock %}
     </div>
-    <div class="col-md-auto">
+    <div class="col">
       {% block vote_alternatives %}
         {% if poll.id %}
           {% include 'poll/vote-alternatives.html' %}
