@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Layoutest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.theme.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/i18n/datepicker-fi.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/moment-with-locales.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col bg-success">
+
+                    <div class="" style="">
+                            <div class="">
+                                My polls
+                            </div>
+                                <table class="">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Start</th>
+                                            <th scope="col">End</th>
+                                            <th scope="col">Votes</th>
+                                            <th scope="col">Breakdown</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="{{ url_for("poll_edit", poll_id = 1) }}">
+                                                    <img src="{{ url_for('static', filename='img/page_edit.png') }}" title="Edit poll"></a>
+                                            </td>
+                                            <td>Poll name</td>
+                                            <td>Open</td>
+                                            <td>Close</td>
+                                            <td>Vote count</td>
+                                            <td><a href="{{ url_for("account_index") }}"><img src="{{ url_for("static", filename="img/chart_curve.png") }}"
+                                                        title="Poll breakdown"></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="card-body">
+                                    <a href="{{ url_for("poll_new") }}" class="card-link">Create new poll</a>
+                                </div>
+                        </div>
+
+
+
+            </div
+            
+            
+            
+            <div class="col bg-warning">
+                <p>Sed ut perspiciatis...</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

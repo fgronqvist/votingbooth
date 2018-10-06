@@ -6,3 +6,8 @@ from application.account.forms import LoginForm
 def index():
     form = LoginForm()
     return render_template("index.html", form=form)
+
+# a simple layout to test css problems etc
+@app.route("/layoutest")
+def layoutest():
+    return render_template("layoutest.html")
