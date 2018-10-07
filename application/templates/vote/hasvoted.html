@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-header alert alert-danger">DANGER WILL ROBINSON!</div>
+                <div class="card-body">
+                    <p>Hmmm... according to our records, you have already voted in this poll ({{poll.name}})!?!</p>
+                    <p>Voting multiple times is not a nice thing to do, but we are certain this was just an innocent
+                        mistake.... Right?</p>
+                    <p>ERROR 0x00003303 DETECTED - REHABILITATION DRONES ON STANDBY</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
