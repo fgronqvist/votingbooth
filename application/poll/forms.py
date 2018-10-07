@@ -24,8 +24,6 @@ class PollForm(FlaskForm):
     class Meta:
         csrf = False
 
-
-
     def validate(self):
         try:
             d = datetime.strftime(self.start_date.data, "%d.%m.%Y")
