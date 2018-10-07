@@ -27,7 +27,7 @@ class Poll(db.Model):
                 left join vote_option on (vote.vote_option_id = vote_option.id)
                 where vote.poll_id = :poll_id
                 group by 
-                    vote.vote_option_id
+                    vote.vote_option_id, vote_option.name
                 order by
                     count(*) desc """).params(poll_id=poll_id)
         ret = []
