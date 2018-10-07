@@ -31,6 +31,8 @@ What has been done week 4
 * Bugfix for NumberValidation on poll minute -field (see https://github.com/wtforms/wtforms/issues/100)
 * Add breakdown for votes
 * Usability fixes based on the code review
+* Group by fix
+* Added check to disalow anonymous voting multiple times in the same session|
 
 ## Time worked
 
@@ -46,3 +48,5 @@ What has been done week 4
 | 2018-9-30 | 5 h | Custom validation for start >= end date of poll, fix for poll editing, added possibility to vote (anonymously) on a poll|
 | 2018-10-4 | 3h | Relationships, bug fix on the poll minute validation|
 | 2018-10-6 | 6h | Breakdown for votes, usability fixes based on the code review|
+| 2018-10-7 | 2h | Group by fix, added check for multiple anymomous voting in the same session|
+
