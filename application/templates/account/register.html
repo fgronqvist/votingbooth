@@ -1,25 +1,56 @@
 {% extends "layout.html" %}
 
+
 {% block body %}
-{% for error in form.errors %}
-    <p style="color:red">{{ error }}</p>
-{% endfor %}
-{% if email_error %}
-    <p style="color: red">{{ email_error }}</p>
-{% endif %}
 
-<form class="" method="post" action="{{ url_for("account_registerb") }}">
-    <label>{{ form.firstname.label }}</label>
-    {{ form.firstname }}
-    <label>{{ form.lastname.label }}</label>
-    {{ form.lastname }}
-    <label>{{ form.email.label }}</label>
-    {{ form.email }}
-    <label>{{ form.password.label }}</label>
-    {{ form.password }}
-    <label>{{ form.passwordb.label }}</label>
-    {{ form.passwordb }}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <form class="" method="post" action="{{ url_for("account_registerb") }}">
+                <div class="card border-primary">
+                    <div class="card-header">
+                        <h4 class="card-title">New account</h4>
+                    </div>
+                    <div class="card-body">
+                        {% for error in form.errors %}
+                        <p style="color:red">{{ error }}</p>
+                        {% endfor %}
+                        {% if email_error %}
+                        <p style="color: red">{{ email_error }}</p>
+                        {% endif %}
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.firstname(class = "form-control", placeholder="Firstname")}}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.lastname(class = "form-control", placeholder="Lastname") }}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.email(class="form-control", placeholder="Email address") }}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.password(class="form-control", placeholder="Password") }}
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.passwordb(class="form-control", placeholder="Password confirmation") }}
+                            </div>
+                        </fieldset>
 
-    <button type="submit">Register</button>
-</form>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
 {% endblock %}
