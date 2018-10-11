@@ -1,0 +1,23 @@
+
+<p>Pages: 
+{% for page in polls.iter_pages() %}
+{% if page %}
+    {% if page != polls.page %}
+        <a href="{{ url_for('account_index', page=page) }}">{{page}}</a>    
+    {% else %}
+        <strong>{{page}}</strong>
+    {% endif %}
+{% else %}
+    <span class="ellipsis">...</span>
+{% endif %}
+{% endfor %}
+</p>
+
+<!--
+{% if polls.has_prev %}
+<a href="{{ url_for('account_index', page=polls.prev_num, breakdown=breakdown) }}">Previous</a>
+{% endif %}
+{% if polls.has_next %}
+<a href="{{ url_for('account_index', page=polls.next_num, breakdown=breakdown) }}">Next</a>
+{% endif %}
+-->

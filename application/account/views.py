@@ -10,8 +10,9 @@ from application.account.forms import RegisterForm, LoginForm
 @app.route("/account/", methods=["GET"])
 @login_required
 def account_index():
-    polls = Poll.query.filter_by(owner_id=current_user.id)
-    breakdown = request.args.get("breakdown")
+    listpage = request.args.get("listpage", type=int)
+    polls = Poll.query.filter_by(owner_id=current_user.id).paginate(listpage,5, False)
+    breakdown = request.args.get("breakdown", type=int)
     poll_breakdown = False
     selected_poll = False
     if breakdown:
