@@ -5,37 +5,47 @@
         <a href="{{ url_for("poll_new") }}" class="card-link" style="float:right"><img src="{{ url_for('static', filename='img/add.png') }}" style="margin-right: 5px;">New poll</a>
     </div>
     <div class="card-body">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Start</th>
-                <th scope="col">End</th>
-                <th scope="col">Votes</th>
-                <th scope="col">Breakdown</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for poll in polls.items %}
-            <tr>
-                <td><a href="{{ url_for("poll_edit", poll_id = poll.id) }}">
-                        <img src="{{ url_for('static', filename='img/page_edit.png') }}" title="Edit poll"></a>
-                </td>
-                <td>{{ poll.name }}</td>
-                <td>{{ poll.date_open.strftime("%-d.%-m.%Y %H:%M") }}</td>
-                <td>{{ poll.date_close.strftime("%-d.%-m.%Y %H:%M") }}</td>
-                <td>{{ poll.votes|length }}</td>
-                <td>
-                {% if poll.votes|length > 0 %}
-                    <a href="{{ url_for("account_index", page=polls.page, breakdown=poll.id) }}"><img src="{{ url_for("static", filename="img/chart_curve.png") }}"
-                            title="Show poll breakdown"></a>
-                {% endif %}
-                </td>
-            </tr>
+        {% if top_polls|length > 0 %}
+        <div class="top_polls">
+            Your top polls (by vote count): 
+            {% set comma = joiner(',') %}
+            {% for poll in top_polls %}
+            {{ comma() }}
+            {{poll.poll_name}} ({{poll.vote_count}})
             {% endfor %}
-        </tbody>
-    </table>
+        </div>
+        {% endif %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">End</th>
+                    <th scope="col">Votes</th>
+                    <th scope="col">Breakdown</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for poll in polls.items %}
+                <tr>
+                    <td><a href="{{ url_for("poll_edit", poll_id = poll.id) }}">
+                            <img src="{{ url_for('static', filename='img/page_edit.png') }}" title="Edit poll"></a>
+                    </td>
+                    <td>{{ poll.name }}</td>
+                    <td>{{ poll.date_open.strftime("%-d.%-m.%Y %H:%M") }}</td>
+                    <td>{{ poll.date_close.strftime("%-d.%-m.%Y %H:%M") }}</td>
+                    <td>{{ poll.votes|length }}</td>
+                    <td>
+                    {% if poll.votes|length > 0 %}
+                        <a href="{{ url_for("account_index", page=polls.page, breakdown=poll.id) }}"><img src="{{ url_for("static", filename="img/chart_curve.png") }}"
+                                title="Show poll breakdown"></a>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% include 'account/poll_pagination.html' %}
     </div>
 </div>

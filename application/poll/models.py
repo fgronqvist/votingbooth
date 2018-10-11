@@ -37,6 +37,24 @@ class Poll(db.Model):
         
         return ret
 
+    @staticmethod
+    def get_top_polls(owner_id, limit):
+        stmt = text("""SELECT
+            vote.poll_id, 
+            poll.name, 
+            count(*) as cnt 
+            FROM vote 
+            LEFT JOIN poll ON (poll.id = vote.poll_id) 
+            GROUP BY vote.poll_id, poll.name 
+            ORDER BY count(*) DESC LIMIT :limit
+        """).params(limit=limit)
+        ret = []
+        res = db.engine.execute(stmt)
+        for row in res:
+            ret.append({"poll_id":row[0], "poll_name":row[1], "vote_count":row[2]})
+        return ret
+
+
 
 class Vote_option(db.Model):
     id = db.Column(db.Integer, primary_key=True)

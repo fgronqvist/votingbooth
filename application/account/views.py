@@ -12,6 +12,7 @@ from application.account.forms import RegisterForm, LoginForm
 def account_index():
     listpage = request.args.get("listpage", type=int)
     polls = Poll.query.filter_by(owner_id=current_user.id).paginate(listpage,5, False)
+    top_polls = Poll.get_top_polls(owner_id=current_user.id, limit=3)
     breakdown = request.args.get("breakdown", type=int)
     poll_breakdown = False
     selected_poll = False
@@ -23,7 +24,8 @@ def account_index():
             print(e)
             abort(404)
 
-    return render_template("account/index.html", polls = polls, poll_breakdown=poll_breakdown, selected_poll=selected_poll)
+    return render_template("account/index.html", polls = polls, top_polls=top_polls, 
+        poll_breakdown=poll_breakdown, selected_poll=selected_poll)
 
 @app.route("/account/login", methods=["POST"])
 def account_login():
