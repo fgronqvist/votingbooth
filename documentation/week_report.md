@@ -34,6 +34,14 @@ What has been done week 4
 * Group by fix
 * Added check to disalow anonymous voting multiple times in the same session|
 
+What has been done week 5
+
+* Pagination for the poll-list
+* Added top-polls query
+* Added poll option for anonymous or registered user only voting
+* Added checks for registered user only voting
+* Added checks for poll timeframe
+
 ## Time worked
 
 | Date | Time | What |
@@ -49,4 +57,6 @@ What has been done week 4
 | 2018-10-4 | 3h | Relationships, bug fix on the poll minute validation|
 | 2018-10-6 | 6h | Breakdown for votes, usability fixes based on the code review|
 | 2018-10-7 | 2h | Group by fix, added check for multiple anymomous voting in the same session|
+| 2018-10-11 | 5h | Added pagination to poll-list, added top-poll query, added poll option for anonymous or registered only voting|
+| 2018-10-12 | 3h | Added checks for registered user voting, added checks for poll timeframe, minor layout changes|
 
