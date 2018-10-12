@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from application.poll.models import Poll, Vote_option
 from .models import Vote
 from .forms import VoteForm, VoteFormConfirm
-from .helpers import hasvoted
+from .helpers import hasvoted, setcookie
 from sqlalchemy import exc
 
 @app.route("/vote/<poll_id>", methods=["GET"])
@@ -15,6 +15,9 @@ def vote_id(poll_id):
         poll = Poll.query.filter_by(id=poll_id).one()
     except exc.SQLAlchemyError:
         abort(404)
+
+    if poll.anynomous == 0 and current_user.is_authenticated == False:
+        return render_template("vote/require_login.html")
 
     if hasvoted(poll.id):
         return render_template("vote/hasvoted.html", poll=poll)
@@ -33,6 +36,9 @@ def show_confirm():
     except exc.SQLAlchemyError:
         abort(404)
 
+    if poll.anynomous == 0 and current_user.is_authenticated == False:
+        return render_template("vote/require_login.html")
+
     if hasvoted(poll.id):
         return render_template("vote/hasvoted.html", poll=poll)
         
@@ -47,6 +53,9 @@ def vote_confirm():
         print(e)
         abort(404)            
 
+    if poll.anynomous == 0 and current_user.is_authenticated == False:
+        return render_template("vote/require_login.html")
+
     if hasvoted(poll.id):
         return render_template("vote/hasvoted.html", poll=poll)
 
@@ -55,20 +64,25 @@ def vote_confirm():
             vote = Vote()
             vote.poll_id = poll.id
             vote.vote_option_id = int(form.selected_option.data)
+            if(poll.anynomous == 0):
+                if(vote.add_account_vote(current_user.id, poll.id) == False):
+                    # The user has already voted in this poll
+                    tpl = render_template("vote/hasvoted.html", poll=poll)
+                    return setcookie(tpl, poll)
             db.session.add(vote)
             db.session.commit()
         except exc.SQLAlchemyError as e:
             print(e)
             abort(404)
         
-        # Store the poll.id into a cookie to prevent multiple votes (in the same session)
+        # Store the poll.id into a cookie to prevent multiple votes (in the same session) for anonymous users
         tpl = render_template("vote/thankyou.html", poll=poll)
-        response = app.make_response(tpl)
-        cookie = []
-        if "vt" in request.cookies:
-            cookie = request.cookies.get("vt").split(".")
-        cookie.append(poll.id)
-        response.set_cookie("vt", ".".join(map(str,cookie)))
-        return response
+        #response = app.make_response(tpl)
+        #cookie = []
+        #if "vt" in request.cookies:
+        #    cookie = request.cookies.get("vt").split(".")
+        #cookie.append(poll.id)
+        #response.set_cookie("vt", ".".join(map(str,cookie)))
+        return setcookie(tpl, poll)
     else:
         return render_template("vote/error.html", poll=poll, form=form)

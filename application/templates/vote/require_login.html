@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-header alert alert-danger">Registration required</div>
+                <div class="card-body">
+                    <p>The administrator for the poll you tried to vote in, has required all voters to be logged in before voting.</p>
+                    <p>You can <a href="{{url_for('index')}}">log in or create an account here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -10,6 +10,7 @@ class Poll(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable=False)
     date_open = db.Column(db.DateTime(timezone=True))
     date_close = db.Column(db.DateTime(timezone=True))
+    anynomous = db.Column(db.Boolean())
 
     options = db.relationship("Vote_option", backref="poll", lazy=True)
     votes = db.relationship("Vote", backref="poll", lazy=True)
@@ -53,8 +54,6 @@ class Poll(db.Model):
         for row in res:
             ret.append({"poll_id":row[0], "poll_name":row[1], "vote_count":row[2]})
         return ret
-
-
 
 class Vote_option(db.Model):
     id = db.Column(db.Integer, primary_key=True)

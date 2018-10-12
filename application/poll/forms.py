@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, BooleanField, IntegerField, HiddenField, SelectField, validators, ValidationError
+from wtforms import StringField, DateField, BooleanField, RadioField, IntegerField, HiddenField, SelectField, validators, ValidationError
 from datetime import datetime
 
 
@@ -19,6 +19,7 @@ class PollForm(FlaskForm):
     end_date = DateField(u"End", [validators.Required()], format="%d.%m.%Y")    
     end_hour = SelectField(u"End hour", choices=time_range(24))
     end_minute = SelectField(u"End minute", choices=time_range(60))
+    anynomous = RadioField(u"Anynomous", choices=[("0",0), ("1",1)])
     delete = BooleanField(u"Delete")
 
     class Meta:
@@ -35,6 +36,7 @@ class PollForm(FlaskForm):
 
             if not FlaskForm.validate(self):
                 return False
+
             if start >= end:
                 errors = list(self.start_date.errors) 
                 errors.append("Start time is larger or equals end time?!?")

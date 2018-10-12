@@ -25,7 +25,7 @@ def poll_new():
     else:
         return render_template("poll/poll.html", form = form, action_url = url_for("poll_new"), poll = poll)
 
-@app.route("/poll/edit/<poll_id>", methods=["POST", "GET"])
+@app.route("/poll/edit/<int:poll_id>", methods=["POST", "GET"])
 @login_required
 def poll_edit(poll_id):
     form = PollForm(request.form)
@@ -49,6 +49,7 @@ def poll_edit(poll_id):
         d = datetime.strftime(form.end_date.data, "%d.%m.%Y")
         d = d +" "+str(form.end_hour.data)+":"+str(form.end_minute.data)
         poll.date_close = datetime.strptime(d, "%d.%m.%Y %H:%M")
+        poll.anynomous = True if form.anynomous.data == "1" else False
         db.session.add(poll)
         db.session.commit()
         return redirect(url_for("account_index"))
@@ -61,6 +62,7 @@ def poll_edit(poll_id):
         form.end_date.data = poll.date_close
         form.end_hour.data = datetime.strftime(poll.date_close, "%-H")
         form.end_minute.data = datetime.strftime(poll.date_close, "%-M")
+        form.anynomous.data = "1" if poll.anynomous else "0"
         return render_template("poll/poll.html", form = form, action_url = url_for("poll_edit", poll_id = poll_id),
             poll = poll, vote_option_form=vote_option_form, vote_options=vote_options)
 

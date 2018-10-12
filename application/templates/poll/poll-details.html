@@ -13,7 +13,6 @@
       {% endfor %}
       {% endfor %}
 
-      <fieldset>
         <div class="form-group">
           <label for="inputPollName">Name</label>
           {{ form.name(class = "form-control", placeholder = "Replace this text with the name of the poll") }}
@@ -41,10 +40,27 @@
             <label class="form-check-label">Delete this poll</label>
           </div>
         </fieldset>
+        <div class="custom-control custom-radio" style="margin-bottom: 10px;">
+          <input id="anynomous1" value="1" name="anynomous" class="custom-control-input" 
+          {% if form.anynomous.data == "1" %}
+          checked="checked"
+          {% endif %}
+           type="radio">
+          <label class="custom-control-label" for="anynomous1">Voting without registering is allowed</label>
+        </div>
+        <div class="custom-control custom-radio" style="margin-bottom: 10px;">
+          <input id="anynomous2" value="0" name="anynomous" class="custom-control-input" 
+          {% if form.anynomous.data == "0" %}
+          checked="checked"
+          {% endif %}
+          type="radio">
+          <label class="custom-control-label" for="anynomous2">Voting requires the user to be registered</label>
+        </div>
         {% endif %}
-        <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{{ url_for("account_index") }}"><button type="button" class="btn btn-secondary">Cancel</button></a>
-      </fieldset>
+        <fieldset class="form-group" style="margin-top: 10px;">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href="{{ url_for("account_index") }}"><button type="button" class="btn btn-secondary">Cancel</button></a>
+        </fieldset>
     </div>
   </div>
 </form>
