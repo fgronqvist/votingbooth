@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-header alert alert-danger">The poll is closed at the moment</div>
+                <div class="card-body">
+                    <p>The poll {{poll.name}} is open for voting between {{poll.date_open.strftime('%d.%m.%Y %H:%M')}} - {{poll.date_close.strftime('%d.%m.%Y %H:%M')}}.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

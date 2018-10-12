@@ -2,6 +2,7 @@ from application import app
 from flask import request
 from flask_login import current_user
 from application.poll.models import Poll
+from datetime import datetime
 
 def hasvoted(poll_id):
     if not request.cookies.get("vt"):
@@ -22,3 +23,9 @@ def setcookie(template, poll):
     cookie.append(poll.id)
     response.set_cookie("vt", ".".join(map(str,cookie)))
     return response
+
+def poll_open_check(poll):
+    # Check that the poll is open on this date
+    if (poll.date_open <= datetime.now() and poll.date_close > datetime.now()):
+        return True
+    return False
