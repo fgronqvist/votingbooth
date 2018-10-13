@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
-    <form class="form-signin" action="{{url_for("account_login")}}" method="post">
+    <form class="form-signin" action="{{url_for('account_login')}}" method="post">
       {{ form.csrf_token }}
-      <img class="mb-4" src="" alt="" width="72" height="72">
+      <div style="text-align: center;">
+          <img class="mb-4" src="{{url_for('static', filename='img/VB-logo-large.png')}}" alt="Votingbooth" title="Votingbooth">
+      </div>
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       {% if login_error %}
         <p style="color:red">Wrong email or password</p>

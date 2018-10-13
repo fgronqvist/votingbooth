@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <div class="card border-primary">
+                <div class="card-header">So, what's this about then?</div>
+                <div class="card-body">
+                    <p style="text-align: center;"><img src="{{url_for('static', filename='img/VB-logo-large.png')}}"></p>
+                    <p>Welcome to the Votingbooth, a place of contemplation and insight. There looms a hint of wisdom just beyond the horizon, for the bravest of souls.</p>
+                    <p>If you think yourself worthy, which most seem to belive these days, you may acquire a personal account by following the narrower path on the frontpage. You may rest asured that no payment is required to do so, atleast none in coin.</p>
+                    <p>You will be presented with opportunities to create polls with wich to greater your knowledge of wordly, and other, things.</p>
+                    <p>May you choose your questions, and draw your conclusions, wisely. For after all, time waits for no man.</p>
+                    <p><a href="{{url_for('index')}}"><button class="btn btn-primary">Fine, return to the frontpage</button></a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+{% endblock %}
