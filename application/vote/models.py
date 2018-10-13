@@ -1,4 +1,5 @@
 from application import db
+from sqlalchemy.sql import text
 
 class Vote(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,6 +21,34 @@ class Vote(db.Model):
         db.session.add(r)
         db.session.commit()
         return True
+
+    @staticmethod
+    def admin_top_polls_most_votes(limit=10):
+        stmt = text("""
+        SELECT
+            count(*) as vote_cnt,
+            poll.id,
+            poll.name,
+            poll.date_open,
+            poll.date_close,
+            account.id,
+            account.firstname,
+            account.lastname
+        FROM
+            vote
+        LEFT JOIN poll ON (vote.poll_id = poll.id)
+        LEFT JOIN account ON (account.id = poll.owner_id)
+            GROUP BY
+                vote.poll_id
+            ORDER BY
+                count(*) desc limit :limit;
+        """).params(limit=limit)
+        return db.engine.execute(stmt)
+
+    @staticmethod
+    def order66():
+        res = db.engine.execute("DELETE FROM vote")
+        res = db.engine.execute("DELETE FROM user_voted")
 
 class User_voted(db.Model):
     id = db.Column(db.Integer, primary_key=True)

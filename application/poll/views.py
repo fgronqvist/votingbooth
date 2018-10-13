@@ -1,13 +1,13 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, redirect, url_for, abort
-from flask_login import login_required, current_user
+from flask_login import current_user
 from .models import Poll, Vote_option
 from .forms import PollForm, VoteOptionForm
 from sqlalchemy import exc
 from datetime import datetime
 
 @app.route("/poll/new", methods=["GET", "POST"])
-@login_required
+@login_required()
 def poll_new():
     form = PollForm(request.form)
     poll = Poll(current_user.id)
@@ -26,7 +26,7 @@ def poll_new():
         return render_template("poll/poll.html", form = form, action_url = url_for("poll_new"), poll = poll)
 
 @app.route("/poll/edit/<int:poll_id>", methods=["POST", "GET"])
-@login_required
+@login_required()
 def poll_edit(poll_id):
     form = PollForm(request.form)
     vote_option_form = VoteOptionForm()
@@ -67,7 +67,7 @@ def poll_edit(poll_id):
             poll = poll, vote_option_form=vote_option_form, vote_options=vote_options)
 
 @app.route("/poll/new_alternative/<poll_id>", methods=["POST"])
-@login_required
+@login_required()
 def new_alternative(poll_id):
     form = VoteOptionForm(request.form)
     try:
@@ -94,7 +94,7 @@ def new_alternative(poll_id):
         return redirect(url_for("poll_edit", poll_id=poll.id))
     
 @app.route("/poll/save_alternative_order/<poll_id>", methods=["POST"])
-@login_required
+@login_required()
 def save_alternative_order(poll_id):
     try:
         poll = Poll.query.filter_by(id=poll_id, owner_id=current_user.id).one()
@@ -115,7 +115,7 @@ def save_alternative_order(poll_id):
     return ""
 
 @app.route("/poll/delete_alternative/", methods=["GET"])
-@login_required
+@login_required()
 def delete_alternative():
     poll = Poll.query.filter_by(id=int(request.args['poll_id']), owner_id=current_user.id).one()
     vote_option = Vote_option.query.filter_by(id=int(request.args['option_id']), poll_id=poll.id).one()

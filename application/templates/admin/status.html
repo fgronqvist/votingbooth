@@ -1,0 +1,18 @@
+{% block top_accounts %}
+<div class="card border-primary mb-3" style="max-width: 40rem;">
+    <div class="card-header">Status</div>
+    <div class="card-body">
+        <div style="float: left;">
+            {% set row = active_polls.first() %}
+            <h4>{{row['total']}} polls</h4>
+            <p>{{row['open']}} active / {{row['closed']}} inactive</p>
+        </div>
+        <div style="float: left; margin-left: 30px;">
+            <h4>{{account_count}} accounts</h4>
+        </div>
+        <div style="float: left; margin-left: 30px;">
+            <h4>{{vote_count}} total votes</h4>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,14 +1,14 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, redirect, url_for, abort
-from flask_login import login_required, login_user, current_user
-from .models import Account
+from flask_login import login_user, current_user
+from .models import Account, Account_role
 from application.poll.models import Poll
 from sqlalchemy import exc
 
 from application.account.forms import RegisterForm, LoginForm
 
 @app.route("/account/", methods=["GET"])
-@login_required
+@login_required()
 def account_index():
     listpage = request.args.get("listpage", type=int)
     polls = Poll.query.filter_by(owner_id=current_user.id).paginate(listpage,5, False)
@@ -48,10 +48,15 @@ def account_registerb():
     if not form.validate():
         return render_template("account/register.html", form = form)
 
+    count = Account.query.count()
     account = Account(form.firstname.data, form.lastname.data, form.email.data, form.password.data)
-    db.session().add(account)
+    if count == 0:
+        # This was the first user to be added, so present the person with GOD LIKE POWERS
+        account.roles.append(Account_role("ADMIN"))
+    db.session().add(account)    
     try:
         db.session().commit()
+
         return render_template("account/register_done.html")
     except exc.SQLAlchemyError:
         email_error = "email not unique"

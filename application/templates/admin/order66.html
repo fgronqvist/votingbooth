@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4"></div>
+
+        <div class="col-4">
+            <div class="card border-primary">
+                {% if not executed %}
+                <div class="card-header alert alert-danger">DANGER WILL ROBINSON!</div>
+                <div class="card-body">
+                    <p>Whoaa, hold on there young grasshopper!</p>
+                    <p>What you are about to do is <strong>NOT</strong> to be taken lightly. If you wonder beyond this
+                        point, forewer will it change your tables.</p>
+                    <p>If you do this, then:</p>
+                    <ol>
+                        <li>all current polls along with their options will be destroyed</li>
+                        <li>all votes will be destroyed</li>
+                        <li>all accounts wil be destroyed, and you alone will remain</li>
+                    </ol>
+                    <p>and a new order will arise:</p>
+                    <ol>
+                        <li>new, strange, accounts will be created</li>
+                        <li>new polls will be generated with unfamiliar options </li>
+                        <li>the accounts will vote in the polls</li>
+                    </ol>
+                    <p>Is this the maddness you truly wish to release?</p>
+                    <a href="{{url_for('admin_index')}}"><button class="btn btn-secondary" type="button" style="margin-bottom: 20px;">I want my my mommy</button></a>
+                    <form action="{{url_for('admin_execute_order66')}}" method="post">
+                        <button type="submit" class="btn btn-primary" name="i_regret_nothing">I am no mere mortal for I am sysadmin, obey me or
+                            perish</button>
+                    </form>
+                </div>
+                {% else %}
+                <div class="card-header">Orders carried out</div>
+                <div class="card-body">
+                    <p>Your orders have been carried out.</p>
+                    <p>May you have chosen your actions wisely.</p>
+                    <p><a href="{{url_for('admin_index')}}">Show me!</a></p>
+                </div>
+
+                {% endif %}
+            </div>
+
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

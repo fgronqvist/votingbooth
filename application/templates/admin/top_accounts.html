@@ -1,0 +1,27 @@
+{% block top_accounts %}
+<div class="card border-primary mb-3" style="max-width: 40rem;">
+    <div class="card-header">Top 10 accounts with most polls
+    </div>
+    <div class="card-body">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Account</th>
+                    <th scope="col">Registered</th>
+                    <th scope="col">Polls</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for poll in top_polls %}
+                <tr>
+                    <td>{{poll['firstname']}} {{poll['lastname']}}</td>
+                    <td>{{poll['date_created']|datetime()}}</td>
+                    <td>{{poll['poll_cnt']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -22,6 +22,44 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 BCRYPT_LOG_ROUNDS = 12
 
+# Init login manager
+from flask_login import LoginManager, current_user
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "index"
+
+from functools import wraps
+def login_required(role="ANY"):
+    def wrapper(fn):
+        @wraps(fn)
+        def decorated_view(*args, **kwargs):
+            if not current_user:
+                return login_manager.unauthorized()
+
+            if not current_user.is_authenticated():
+                return login_manager.unauthorized()
+            
+            unauthorized = False
+
+            if role != "ANY":
+                unauthorized = True
+                
+                for user_role in current_user.roles:
+                    if user_role.name == role:
+                        unauthorized = False
+                        break
+
+            if unauthorized:
+                return login_manager.unauthorized()
+            
+            return fn(*args, **kwargs)
+        return decorated_view
+    return wrapper
+
+@login_manager.user_loader
+def load_user(userid):
+    return Account.query.filter(Account.id==userid).first()
+
 # Init app modules
 from application import views
 from application.account import views
@@ -29,18 +67,27 @@ from application.account import models
 from application.account.models import Account
 from application.poll import views, models
 from application.vote import views, models
+from application.admin import views
 
 db.create_all()
-#try:
-#except:
-#    pass
 
-# Init login manager
-from flask_login import LoginManager
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "index"
+# Init UserManager
+# from flask_user import UserManager
+# user_manager = UserManager(app, db, Account)
 
-@login_manager.user_loader
-def load_user(userid):
-    return Account.query.filter(Account.id==userid).first()
+# Date format snippet
+from datetime import datetime
+def format_datetime(value, format='medium'):
+    # Remove annoying microseconds if they are present
+    if not value:
+        return
+    value = value.split(".", 1)[0]
+    print(value)
+    if format == 'full':
+        format="EEEE, d. MMMM y 'at' HH:mm"
+    elif format == 'medium':
+        format="%d.%m.%Y %H:%M"
+    d = datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
+    return d.strftime(format)
+
+app.jinja_env.filters['datetime'] = format_datetime

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+        {% block active_v_inactive_polls %}
+            {% include 'admin/status.html' %}
+        {% endblock %}
+        {% block top_accounts %}
+            {% include 'admin/top_accounts.html' %}
+        {% endblock %}
+        {% block thedarkside %}
+        {% include 'admin/thedarkside.html' %}
+        {% endblock %}
+    </div>
+    <div class="col">
+        {% block top_polls %}
+            {% include 'admin/top_polls.html' %}
+        {% endblock %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

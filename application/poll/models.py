@@ -55,8 +55,80 @@ class Poll(db.Model):
             ret.append({"poll_id":row[0], "poll_name":row[1], "vote_count":row[2]})
         return ret
 
+    @staticmethod
+    def get_admin_top_polls(limit=10):
+        stmt = text("""
+        SELECT
+            account.id,
+            account.firstname,
+            account.lastname,
+            account.email,
+            account.date_created,
+            count(*) as poll_cnt
+        FROM
+            poll
+        LEFT JOIN account ON (poll.owner_id = account.id)
+        GROUP BY
+            account.id
+        ORDER BY
+            count(*) desc
+        LIMIT :limit
+        """).params(limit=limit)
+        return db.engine.execute(stmt)
+
+    @staticmethod
+    def admin_active_vs_inactive_polls(now):
+        stmt = text("""
+        SELECT
+            (SELECT count(*) 
+                FROM
+                    poll
+                WHERE
+                    date_open <= :now
+                AND
+                    date_close >= :now
+            ) AS open,
+            (SELECT count(*) 
+                FROM
+                    poll
+                WHERE
+                    date_open >= :now
+                OR
+                    date_close < :now
+                ) AS closed,
+            count(*) AS total
+            FROM
+            poll
+        """).params(now=now.now())
+        return db.engine.execute(stmt)
+
+    @staticmethod
+    def get_random_id():
+        stmt = text("SELECT id FROM poll ORDER BY RANDOM() LIMIT 1")
+        res = db.engine.execute(stmt)
+        return res.first()
+
+
+    @staticmethod
+    def order66():
+        res = db.engine.execute("DELETE FROM poll")
+        res = db.engine.execute("DELETE FROM vote_option")
+        
+
 class Vote_option(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     poll_id = db.Column(db.Integer, db.ForeignKey('poll.id'), nullable=False)
     ordernum = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(256), nullable=False)
+
+    @staticmethod
+    def get_random_id(poll_id):
+        stmt = text("""SELECT 
+            id 
+        FROM 
+            vote_option
+        WHERE 
+            poll_id = :poll_id 
+        ORDER BY RANDOM() LIMIT 1""").params(poll_id=poll_id)
+        res = db.engine.execute(stmt)
+        return res.first()
