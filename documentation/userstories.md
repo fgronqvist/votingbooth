@@ -7,7 +7,6 @@ Below are a list of user stories that the application should satisfy.
 
 |Implemented| As a/an | I want to | So that...|
 |---|---|---|---|
-|No|Voter|be able to log in|I can see polls only ment for me|
 |Done|Voter|be able to cast my vote|the vote can be registered|
 |Done|Pollster|set a date/time when the poll is open for votes|the voting can be done within a specific timeframe|
 |Done|Pollster|able to log in|I can manage polls|
