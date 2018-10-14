@@ -21,6 +21,7 @@ The back-end data-storage is a Sqlite/Postgres database with a schema pictured b
 
 The app is structured in the way below.
 
+```
   .
   |-- application
   |   |-- account
@@ -39,6 +40,7 @@ The app is structured in the way below.
   |   |   `-- vote
   |   `-- vote
   `-- documentation
+```
 
 ### Documentation
 
