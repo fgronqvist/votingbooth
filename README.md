@@ -11,6 +11,17 @@ The specifications for the application is listed at <http://advancedkittenry.git
 
 Check out the [documentation](documentation) for further details.
 
+## TL;DR to run
+
+ * pull the repo
+ * create a Python 3 venv (<https://docs.python.org/3/library/venv.html>) inside the pulled repo
+ * activate the venv and re-check that you activated the venv. Instructions in the link above if you are unfamiliar with it
+ * run `pip install -r requirements.txt` once you have the venv activated to install all python dependencies
+ * run `pyhton run.py` or perhaps `python3 run.py`
+ * the app should fire up and run on localhost:5000
+ * ???
+ * profit
+
 ## Datastorage
 
 The back-end data-storage is a Sqlite/Postgres database with a schema pictured below.
