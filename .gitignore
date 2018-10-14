@@ -108,3 +108,8 @@ scratch.txt
 .vscode/
 votingbooth.db
 *.dia
+application/scratch.py
+dump.sql
+t.sql
+polldump.sql
+application/templates/layoutest.html

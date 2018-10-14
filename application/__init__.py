@@ -71,10 +71,6 @@ from application.admin import views
 
 db.create_all()
 
-# Init UserManager
-# from flask_user import UserManager
-# user_manager = UserManager(app, db, Account)
-
 # Date format snippet
 from datetime import datetime
 def format_datetime(value, format='medium'):
@@ -82,7 +78,6 @@ def format_datetime(value, format='medium'):
     if not value:
         return
     value = value.split(".", 1)[0]
-    print(value)
     if format == 'full':
         format="EEEE, d. MMMM y 'at' HH:mm"
     elif format == 'medium':

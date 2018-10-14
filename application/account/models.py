@@ -53,7 +53,6 @@ class Account(db.Model):
     def has_role(self, role):
         role = role.upper()
         for r in self.roles:
-            print("r: %s" % (r.name))
             if role == r.name:
                 return True
         return False

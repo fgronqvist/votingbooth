@@ -30,7 +30,6 @@ class adminHelper:
             surname = self.get_surname()
             email = self.get_email(firstname=firstname, surname=surname)
             password = self.get_pollname()
-            #print("name: %s %s (%s)" % (firstname, surname, email))
             a = Account(firstname=firstname, lastname=surname, email=email, password="", skip_password=True)
             db.session.add(a)
             db.session.commit()
@@ -48,8 +47,6 @@ class adminHelper:
             rnd_min = random.randint(0,59)
             end_d = start_d + timedelta(days=rnd_days, hours=rnd_hours, minutes=rnd_min)
             end_d = end_d.replace(microsecond=0)
-            #print ("start_d: %s" % (start_d.strftime("%d.%m.%Y %H:%M")))
-            #print ("end_d: %s" % (end_d.strftime("%d.%m.%Y %H:%M")))
 
             poll = Poll(Account.get_random_id()[0])
             poll.name = self.get_pollname()
@@ -58,7 +55,7 @@ class adminHelper:
             poll.date_close = end_d
             db.session.add(poll)
             db.session.commit()
-            #print("%d (anon: %d): %s" % (poll.id, poll.anonymous, poll.name))
+
             order = 1
             for n in range(random.randint(2,15)):
                 option = Vote_option()
@@ -69,10 +66,6 @@ class adminHelper:
                 db.session.add(option)
             
             db.session.commit()
-                #print("  option: %s" %(option.name))
-
-        #print("num_accounts: %d" % (self.num_accounts))        
-        #print("num_polls: %d" % (self.num_polls))
 
         for v in range(random.randint(500, 1000)):
             poll = Poll.query.filter_by(id=Poll.get_random_id()[0]).first()
@@ -83,20 +76,12 @@ class adminHelper:
             db.session.add(vote)
             db.session.commit()
             if poll.anynomous == 0:
-                print("Poll anynomous : 0")
                 account = Account.query.filter_by(id=Account.get_random_id()[0]).first()
                 user_voted = User_voted()
                 user_voted.poll_id = poll.id
                 user_voted.account_id = account.id
                 db.session.add(user_voted)
                 db.session.commit()
-
-        # Vote random number of times between 2000 and 10000
-        # Pick a random poll
-        # Pick a random option from the poll
-        # Check if the poll requires account to vote
-        #   if yes, pick a random account
-        # Vote
 
     def get_firstname(self):
         if len(self.list_firstname) == 0:
