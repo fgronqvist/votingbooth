@@ -41,6 +41,9 @@ What has been done week 5
 * Added poll option for anonymous or registered user only voting
 * Added checks for registered user only voting
 * Added checks for poll timeframe
+* Added admin views
+* Added role based authorization
+* Some minor layout fixes
 
 ## Time worked
 
@@ -59,4 +62,6 @@ What has been done week 5
 | 2018-10-7 | 2h | Group by fix, added check for multiple anymomous voting in the same session|
 | 2018-10-11 | 5h | Added pagination to poll-list, added top-poll query, added poll option for anonymous or registered only voting|
 | 2018-10-12 | 3h | Added checks for registered user voting, added checks for poll timeframe, minor layout changes|
-
+| 2018-10-13 | 10h | Added admin views and role based authorization, layout fixes|
+| 2018-10-14 | 2h | Minor layout changes and documentation updates|
+| | 67h | TOTAL|

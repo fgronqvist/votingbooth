@@ -35,10 +35,10 @@ def login_required(role="ANY"):
         def decorated_view(*args, **kwargs):
             if not current_user:
                 return login_manager.unauthorized()
-
-            if not current_user.is_authenticated():
+           
+            if not current_user.is_authenticated:
                 return login_manager.unauthorized()
-            
+
             unauthorized = False
 
             if role != "ANY":

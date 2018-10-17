@@ -10,6 +10,7 @@ from datetime import datetime
 @login_required()
 def poll_new():
     form = PollForm(request.form)
+    form.anynomous.data = "1"
     poll = Poll(current_user.id)
     if form.validate_on_submit():
         poll.name = form.name.data
@@ -19,6 +20,7 @@ def poll_new():
         d = datetime.strftime(form.end_date.data, "%d.%m.%Y")
         d = d +" "+str(form.end_hour.data)+":"+str(form.end_minute.data)
         poll.date_close = datetime.strptime(d, "%d.%m.%Y %H:%M")
+        poll.anynomous = bool(form.anynomous.data)
         db.session.add(poll)
         db.session.commit()
         return redirect(url_for("poll_edit", poll_id=poll.id))
@@ -35,9 +37,13 @@ def poll_edit(poll_id):
         vote_options = Vote_option.query.filter_by(poll_id=poll_id).order_by(Vote_option.ordernum)
         if form.delete.data:
             db.session.delete(poll)
+            #db.session.delete(poll.options)
+            #db.session.delete(poll.votes)
+
             db.session.commit()
             return redirect(url_for("account_index"))
-    except exc.SQLAlchemyError:
+    except exc.SQLAlchemyError as e:
+        print(e)
         abort(404)
 
     if form.validate_on_submit():

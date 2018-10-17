@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from application.poll.models import Poll, Vote_option
 from .models import Vote
 from .forms import VoteForm, VoteFormConfirm
-from .helpers import *
+from .helpers import hasvoted, setcookie, poll_open_check
 from sqlalchemy import exc
 
 @app.route("/vote/<int:poll_id>", methods=["GET"])

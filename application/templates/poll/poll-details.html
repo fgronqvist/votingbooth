@@ -1,5 +1,5 @@
 {% block poll_details %}
-<form method="post" action="{{ action_url }}">
+<form id="pollform" method="post" action="{{ action_url }}">
   <div class="card border-primary">
     <div class="card-header">
       <h4 class="card-title">Poll</h4>
@@ -74,23 +74,34 @@
   </div>
 </div>
 {% endif %}
-{% endblock %}
 
-{% block pagejs %}
 <script type="text/javascript">
-datepicker_options = {
-        minDate: 0, 
-        maxDate: "+1Y",
-        option: $.datepicker.regional['fi']
-        };
 
-    $(function(){
-        $('#start_date').datepicker(datepicker_options);
+  $("#pollform").on("submit", function(){
+    if($("#delete").is(':checked')){
+      ret = confirm("Are you sure you want to delete this poll? All options AND votes will be destroyed!")
+      if(ret == false){
+        $("#delete").attr('checked', false);
+        return false;
+      } else {
+        return true;
+      }
+    } 
+  })
+  
+  datepicker_options = {
+    minDate: 0, 
+    maxDate: "+1Y",
+    option: $.datepicker.regional['fi']
+  };
+  
+  $(function(){
+    $('#start_date').datepicker(datepicker_options);
     });
-
+    
     $(function(){
-        $('#end_date').datepicker(datepicker_options);
+      $('#end_date').datepicker(datepicker_options);
     })
-</script>    
+    </script>    
 
 {% endblock %}

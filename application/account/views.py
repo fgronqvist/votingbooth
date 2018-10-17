@@ -1,6 +1,6 @@
 from application import app, db, login_required
 from flask import render_template, request, redirect, url_for, abort
-from flask_login import login_user, current_user
+from flask_login import login_user, current_user, logout_user
 from .models import Account, Account_role
 from application.poll.models import Poll
 from sqlalchemy import exc
@@ -36,6 +36,12 @@ def account_login():
         return redirect(url_for("account_index"))
     else:
         return render_template("index.html", form=login_form, login_error = True)
+
+@app.route("/account/logout")
+@login_required()
+def account_logout():
+    logout_user()
+    return redirect(url_for("index"))
 
 @app.route("/account/register", methods=["GET"])
 def account_register():

@@ -12,8 +12,8 @@ class Poll(db.Model):
     date_close = db.Column(db.DateTime(timezone=True))
     anynomous = db.Column(db.Boolean())
 
-    options = db.relationship("Vote_option", backref="poll", lazy=True)
-    votes = db.relationship("Vote", backref="poll", lazy=True)
+    options = db.relationship("Vote_option", backref="poll", lazy=True, cascade="all, delete-orphan")
+    votes = db.relationship("Vote", backref="poll", lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, owner_id):
         self.owner_id = owner_id
