@@ -64,4 +64,5 @@ What has been done week 5
 | 2018-10-12 | 3h | Added checks for registered user voting, added checks for poll timeframe, minor layout changes|
 | 2018-10-13 | 10h | Added admin views and role based authorization, layout fixes|
 | 2018-10-14 | 2h | Minor layout changes and documentation updates|
-| | 67h | TOTAL|
+| 2018-10-17 | 2h | Minor layout changes and logic fixes|
+| | 69h | TOTAL|
