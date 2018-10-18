@@ -1,7 +1,7 @@
 from application import app, login_required
 from flask import render_template, request, redirect, url_for, abort
 from flask_login import current_user
-from flask_user import roles_required
+#from flask_user import roles_required
 from .helpers import adminHelper
 from application.poll.models import Poll
 from application.vote.models import Vote
