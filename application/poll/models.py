@@ -57,6 +57,24 @@ class Poll(db.Model):
 
     @staticmethod
     def get_admin_top_polls(limit=10):
+        # stmt = text("""
+        # SELECT
+        #     account.id,
+        #     account.firstname,
+        #     account.lastname,
+        #     account.email,
+        #     account.date_created,
+        #     count(*) as poll_cnt
+        # FROM
+        #     poll
+        # LEFT JOIN account ON (poll.owner_id = account.id)
+        # GROUP BY
+        #     account.id
+        # ORDER BY
+        #     count(*) desc
+        # LIMIT :limit
+        # """).params(limit=limit)
+
         stmt = text("""
         SELECT
             account.id,
@@ -64,15 +82,21 @@ class Poll(db.Model):
             account.lastname,
             account.email,
             account.date_created,
-            count(*) as poll_cnt
+            t.poll_cnt
         FROM
-            poll
-        LEFT JOIN account ON (poll.owner_id = account.id)
-        GROUP BY
-            account.id
-        ORDER BY
-            count(*) desc
-        LIMIT :limit
+            (
+                SELECT 
+                    count(*) as poll_cnt,
+                    owner_id
+                FROM
+                    poll
+                GROUP BY
+                    owner_id
+                ORDER BY
+                    count(*) desc
+                LIMIT :limit
+                ) AS t
+        LEFT JOIN account ON (t.owner_id = account.id)
         """).params(limit=limit)
         return db.engine.execute(stmt)
 
