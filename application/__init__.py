@@ -84,7 +84,7 @@ def format_datetime(val, format='medium'):
     t = datetime.now()
     print(isinstance(val, datetime))
     print("X")
-    if isinstance(val, type(datetime)):
+    if isinstance(val, datetime):
         return val.strftime(format)
     else: 
         # Remove annoying microseconds if they are present
