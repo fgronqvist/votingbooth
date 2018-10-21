@@ -24,26 +24,6 @@ class Vote(db.Model):
 
     @staticmethod
     def admin_top_polls_most_votes(limit=10):
-        # stmt = text("""
-        # SELECT
-        #     count(*) as vote_cnt,
-        #     poll.id,
-        #     poll.name,
-        #     poll.date_open,
-        #     poll.date_close,
-        #     account.id,
-        #     account.firstname,
-        #     account.lastname
-        # FROM
-        #     vote
-        # LEFT JOIN poll ON (vote.poll_id = poll.id)
-        # LEFT JOIN account ON (account.id = poll.owner_id)
-        #     GROUP BY
-        #         vote.poll_id
-        #     ORDER BY
-        #         count(*) desc limit :limit;
-        # """).params(limit=limit)
-
         stmt  = text("""
         SELECT
             t.vote_cnt,

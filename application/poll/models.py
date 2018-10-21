@@ -57,24 +57,6 @@ class Poll(db.Model):
 
     @staticmethod
     def get_admin_top_polls(limit=10):
-        # stmt = text("""
-        # SELECT
-        #     account.id,
-        #     account.firstname,
-        #     account.lastname,
-        #     account.email,
-        #     account.date_created,
-        #     count(*) as poll_cnt
-        # FROM
-        #     poll
-        # LEFT JOIN account ON (poll.owner_id = account.id)
-        # GROUP BY
-        #     account.id
-        # ORDER BY
-        #     count(*) desc
-        # LIMIT :limit
-        # """).params(limit=limit)
-
         stmt = text("""
         SELECT
             account.id,
