@@ -73,16 +73,20 @@ db.create_all()
 
 # Date format snippet
 from datetime import datetime
-def format_datetime(value, format='medium'):
-    # Remove annoying microseconds if they are present
-    if not value:
+def format_datetime(val, format='medium'):
+    if not val:
         return
-    value = value.split(".", 1)[0]
     if format == 'full':
         format="EEEE, d. MMMM y 'at' HH:mm"
     elif format == 'medium':
         format="%d.%m.%Y %H:%M"
-    d = datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
-    return d.strftime(format)
+
+    if isinstance(val, type(datetime.date)):
+        return val.strftime(format)
+    else: 
+        # Remove annoying microseconds if they are present
+        val = val.split(".", 1)[0]
+        d = datetime.strptime(val, '%Y-%m-%d %H:%M:%S')
+        return d.strftime(format)
 
 app.jinja_env.filters['datetime'] = format_datetime
