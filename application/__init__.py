@@ -10,7 +10,7 @@ toolbar = DebugToolbarExtension(app)
 from flask_sqlalchemy import SQLAlchemy
 import os
 if os.environ.get("HEROKU"):
-    app.config['SECRET_KEY'] = urandom(32)
+    app.config['SECRET_KEY'] = os.urandom(32)
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 else:
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///votingbooth.db"
