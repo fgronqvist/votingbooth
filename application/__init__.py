@@ -81,7 +81,10 @@ def format_datetime(val, format='medium'):
     elif format == 'medium':
         format="%d.%m.%Y %H:%M"
 
-    if isinstance(val, type(datetime.date)):
+    t = datetime.now()
+    print(isinstance(val, datetime))
+    print("X")
+    if isinstance(val, type(datetime)):
         return val.strftime(format)
     else: 
         # Remove annoying microseconds if they are present
