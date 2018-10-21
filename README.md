@@ -5,9 +5,12 @@ Need to vote on something? Step right up to the votingbooth and cast your vote. 
 
 The votingbooth is a python web-application to create polls and vote in them. Votes can be cast either anonymously or as a registered user, but all cast votes are anonymous regardless of login status.
 
-Checkout the app att <https://fgronqvist-votingbooth.herokuapp.com/> and the repo at <https://github.com/fgronqvist/votingbooth>
+Checkout the app at <https://fgronqvist-votingbooth.herokuapp.com/> and the repo at <https://github.com/fgronqvist/votingbooth>. You can use the admin login credentials below to see the admin view, and you can register a new non-admin account from the login page.
 
-The specifications for the application is listed at <http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html>. [Usecases](documentation/userstories.md), object-diagrams, database schema layouts and definitions will be added as the work progresses.
+Admin username: jaska@jokunen.net
+Admin password: jaska
+
+The specifications for the application is listed at <http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Aanestys.html>. 
 
 Check out the [documentation](documentation) for further details.
 
@@ -22,11 +25,18 @@ Check out the [documentation](documentation) for further details.
  * ???
  * profit
 
-## Datastorage
+## Data storage
 
-The back-end data-storage is a Sqlite/Postgres database with a schema pictured below.
+The back-end data storage is a Sqlite/Postgres database with a schema pictured below. It uses SQLite when run locally and Postgres when run on Heroku.
 
 ![db diagram](documentation/Db_diagram.png)
+
+The table definitions are available from the links below.
+
+[SQLite table definitions](documentation/sqlite-schema.sql)
+
+[Postgres table definitions](documentation/postgres-schema.sql)
+
 
 ## Application layout
 
